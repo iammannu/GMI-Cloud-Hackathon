@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: #0a0a0f;
+    color: #f8fafc;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+      "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #111118;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #2a2a3f;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4338ca;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+
+  .glass-strong {
+    @apply bg-white/8 backdrop-blur-xl border border-white/15;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-indigo-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent;
+  }
+
+  .gradient-text-warm {
+    @apply bg-gradient-to-r from-amber-400 via-orange-400 to-rose-400 bg-clip-text text-transparent;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:border-indigo-500/40 hover:bg-white/8 hover:-translate-y-0.5;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500
+           text-white font-semibold rounded-xl px-6 py-3 transition-all duration-200
+           shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5
+           active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0;
+  }
+
+  .btn-secondary {
+    @apply bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20
+           text-slate-300 hover:text-white font-medium rounded-xl px-5 py-2.5
+           transition-all duration-200;
+  }
+
+  .streaming-cursor::after {
+    content: "▋";
+    animation: typing 0.8s steps(1) infinite;
+    color: #818cf8;
+    margin-left: 2px;
+  }
+
+  .glow-indigo {
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+  }
+
+  .mesh-bg {
+    background-color: #0a0a0f;
+    background-image:
+      radial-gradient(at 30% 10%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+      radial-gradient(at 80% 5%, rgba(139, 92, 246, 0.1) 0px, transparent 50%),
+      radial-gradient(at 5% 60%, rgba(59, 130, 246, 0.1) 0px, transparent 50%),
+      radial-gradient(at 95% 90%, rgba(168, 85, 247, 0.08) 0px, transparent 50%);
+  }
+
+  .section-title {
+    @apply text-lg font-semibold text-white mb-4 flex items-center gap-2;
+  }
+
+  .tag {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .bg-white\/8 {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* Markdown prose styles */
+.prose-dark {
+  color: #cbd5e1;
+  line-height: 1.75;
+}
+
+.prose-dark h1,
+.prose-dark h2,
+.prose-dark h3,
+.prose-dark h4 {
+  color: #f1f5f9;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-dark h1 { font-size: 1.5rem; }
+.prose-dark h2 { font-size: 1.25rem; }
+.prose-dark h3 { font-size: 1.1rem; }
+
+.prose-dark p {
+  margin-bottom: 0.75rem;
+}
+
+.prose-dark ul,
+.prose-dark ol {
+  margin-left: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-dark li {
+  margin-bottom: 0.25rem;
+}
+
+.prose-dark code {
+  background: rgba(99, 102, 241, 0.15);
+  color: #a5b4fc;
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+  font-size: 0.875em;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+}
+
+.prose-dark pre {
+  background: #0f0f1a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 0.75rem 0;
+}
+
+.prose-dark pre code {
+  background: none;
+  padding: 0;
+  color: #e2e8f0;
+}
+
+.prose-dark blockquote {
+  border-left: 3px solid #6366f1;
+  padding-left: 1rem;
+  color: #94a3b8;
+  font-style: italic;
+  margin: 0.75rem 0;
+}
+
+.prose-dark table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.875rem;
+}
+
+.prose-dark th {
+  background: rgba(99, 102, 241, 0.15);
+  color: #c7d2fe;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.prose-dark td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: #cbd5e1;
+}
+
+.prose-dark tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.prose-dark a {
+  color: #818cf8;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.prose-dark strong {
+  color: #f1f5f9;
+  font-weight: 600;
+}
+
+/* Mermaid diagram theming */
+.mermaid-container .mermaid svg {
+  max-width: 100%;
+  height: auto;
+}

@@ -1,0 +1,49 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: launchpilot-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - GMI_BASE_URL=${GMI_BASE_URL}
+      - GMI_API_KEY=${GMI_API_KEY}
+      - GMI_MODEL=${GMI_MODEL:-meta-llama/Llama-3.3-70B-Instruct}
+      - APP_ENV=${APP_ENV:-production}
+      - APP_HOST=0.0.0.0
+      - APP_PORT=8000
+      - FRONTEND_URL=${FRONTEND_URL:-http://localhost:3000}
+      - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost:3000}
+      - LLM_TEMPERATURE=${LLM_TEMPERATURE:-0.7}
+      - LLM_MAX_TOKENS=${LLM_MAX_TOKENS:-4096}
+      - LLM_TIMEOUT=${LLM_TIMEOUT:-120}
+    env_file:
+      - .env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        - VITE_API_URL=${VITE_API_URL:-http://localhost:8000}
+    container_name: launchpilot-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+networks:
+  default:
+    name: launchpilot-network
