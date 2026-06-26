@@ -69,8 +69,8 @@ def get_default_model() -> str:
 
 def create_llm(model: Optional[str] = None, streaming: bool = False) -> ChatOpenAI:
     return ChatOpenAI(
-        base_url=os.getenv("GMI_BASE_URL", "https://api.gmi-serving.com/v1"),
-        api_key=os.getenv("GMI_API_KEY", ""),
+        base_url=os.getenv("GMI_MAAS_BASE_URL") or os.getenv("GMI_BASE_URL", "https://api.gmi-serving.com/v1")
+        api_key = os.getenv("GMI_MAAS_API_KEY") or os.getenv("GMI_API_KEY", "")
         model=model or get_default_model(),
         temperature=float(os.getenv("LLM_TEMPERATURE", "0.7")),
         max_tokens=int(os.getenv("LLM_MAX_TOKENS", "4096")),

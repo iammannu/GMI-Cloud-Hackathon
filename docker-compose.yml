@@ -9,8 +9,10 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - GMI_BASE_URL=${GMI_BASE_URL}
-      - GMI_API_KEY=${GMI_API_KEY}
+
+      - GMI_BASE_URL=${GMI_MAAS_BASE_URL:-${GMI_BASE_URL}}
+      - GMI_API_KEY=${GMI_MAAS_API_KEY:-${GMI_API_KEY}}
+      
       - GMI_MODEL=${GMI_MODEL:-meta-llama/Llama-3.3-70B-Instruct}
       - APP_ENV=${APP_ENV:-production}
       - APP_HOST=0.0.0.0
